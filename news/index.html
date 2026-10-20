@@ -1,0 +1,14 @@
+---
+layout: default
+title: News
+---
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">News</h1>
+    {% if site.posts.size > 0 %}
+      {% include news-list.html posts=site.posts limit=1000 %}
+    {% else %}
+      <p>No news yet.</p>
+    {% endif %}
+  </div>
+</section>

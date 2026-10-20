@@ -1,0 +1,4 @@
+{% comment %}
+  Renders editor content. Pages CMS stores uploaded images as /images/...;
+  prefix them with baseurl so they also work on a github.io project URL.
+{% endcomment %}{% assign img_prefix = 'src="' | append: site.baseurl | append: '/images/' %}{{ include.html | replace: 'src="/images/', img_prefix }}

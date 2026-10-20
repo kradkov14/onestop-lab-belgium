@@ -1,0 +1,12 @@
+<div class="news-grid">
+  {% for post in include.posts limit: include.limit %}
+  <a class="news-card" href="{{ post.url | relative_url }}">
+    {% if post.image.size > 0 %}<img src="{{ post.image | relative_url }}" alt="" loading="lazy">{% else %}<div class="news-card-placeholder" aria-hidden="true"></div>{% endif %}
+    <div class="news-card-body">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%Y" }}</time>
+      <h3>{{ post.title }}</h3>
+      {% if post.summary.size > 0 %}<p>{{ post.summary }}</p>{% endif %}
+    </div>
+  </a>
+  {% endfor %}
+</div>

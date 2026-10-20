@@ -1,0 +1,21 @@
+{% assign lab = site.data.lab %}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand-onestop" src="{{ '/assets/img/onestop-logo.svg' | relative_url }}" alt="OneSTOP" width="122" height="31">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-lab">{{ lab.name }}</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/news/' | relative_url }}" {% if page.url contains '/news/' %}aria-current="page"{% endif %}>News</a>
+      {% assign extra = site.subpages | where: "menu", true | sort: "order" %}
+      {% for p in extra %}
+        <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}aria-current="page"{% endif %}>{{ p.menu_title | default: p.title }}</a>
+      {% endfor %}
+      <a class="nav-external" href="https://onestop-project.eu/living-labs">OneSTOP project&nbsp;↗</a>
+    </nav>
+  </div>
+</header>

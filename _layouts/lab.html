@@ -1,0 +1,89 @@
+---
+layout: default
+---
+{% assign lab = site.data.lab %}
+<section class="hero" style="--hero-img: url('{{ page.hero_image | default: '/assets/img/hero-bg.jpg' | relative_url }}')">
+  <div class="container hero-inner">
+    {% if lab.logo.size > 0 %}<img class="hero-logo" src="{{ lab.logo | relative_url }}" alt="" width="120" height="120">{% endif %}
+    <div>
+      <p class="eyebrow">OneSTOP Living Lab</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle.size > 0 %}<p class="hero-sub">{{ page.subtitle }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container intro-grid">
+    <div class="prose">
+      {% if page.intro.size > 0 %}<p class="lead">{{ page.intro }}</p>{% endif %}
+      {% include rich.html html=content %}
+    </div>
+    {% if page.facts.size > 0 %}
+    <aside class="facts" aria-label="Key facts">
+      <dl>
+        {% for f in page.facts %}
+        <div class="fact"><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>
+        {% endfor %}
+      </dl>
+      {% if lab.institution.size > 0 %}<p class="facts-team"><span>Lab team</span>{{ lab.institution }}</p>{% endif %}
+    </aside>
+    {% endif %}
+  </div>
+</section>
+
+{% if page.highlights.size > 0 %}
+<section class="section section-tint">
+  <div class="container">
+    <div class="cards">
+      {% for h in page.highlights %}
+      {% assign h_html = h.body | markdownify %}
+      <article class="card">
+        <h2>{{ h.title }}</h2>
+        <div class="prose">{% include rich.html html=h_html %}</div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if page.gallery.size > 0 %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Gallery</h2>
+    <div class="gallery">
+      {% for g in page.gallery %}
+      <figure>
+        <img src="{{ g.image | relative_url }}" alt="{{ g.caption | escape }}" loading="lazy">
+        {% if g.caption.size > 0 %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if site.posts.size > 0 %}
+<section class="section section-tint">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Latest news</h2>
+      <a class="link-arrow" href="{{ '/news/' | relative_url }}">All news →</a>
+    </div>
+    {% include news-list.html posts=site.posts limit=3 %}
+  </div>
+</section>
+{% endif %}
+
+{% if lab.contact_email.size > 0 or lab.contact_text.size > 0 %}
+<section class="section contact-band">
+  <div class="container contact-inner">
+    <div>
+      <h2>Get involved</h2>
+      {% if lab.contact_text.size > 0 %}<p>{{ lab.contact_text }}</p>{% endif %}
+    </div>
+    {% if lab.contact_email.size > 0 %}<a class="btn" href="mailto:{{ lab.contact_email }}">Contact the lab</a>{% endif %}
+  </div>
+</section>
+{% endif %}

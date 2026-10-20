@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<article class="section">
+  <div class="container narrow">
+    <a class="link-back" href="{{ '/news/' | relative_url }}">← All news</a>
+    <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %B %Y" }}</time>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.summary.size > 0 %}<p class="lead">{{ page.summary }}</p>{% endif %}
+    {% if page.image.size > 0 %}<img class="post-image" src="{{ page.image | relative_url }}" alt="">{% endif %}
+    <div class="prose">{% include rich.html html=content %}</div>
+  </div>
+</article>

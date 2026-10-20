@@ -1,0 +1,155 @@
+# Pages CMS configuration — https://pagescms.org/docs/configuration/
+# Defines what Living Lab editors can change. Design, menu structure and
+# technical settings (_layouts, _includes, assets, _config.yml) are NOT exposed.
+
+media:
+  input: images
+  output: /images
+
+content:
+  - name: home
+    label: Home page
+    type: file
+    path: index.md
+    fields:
+      - name: title
+        label: Lab name (page heading)
+        type: string
+        required: true
+      - name: subtitle
+        label: Subtitle
+        type: string
+        description: Short line under the heading, e.g. the region.
+      - name: hero_image
+        label: Header image
+        type: image
+        description: Wide landscape photo, at least 1600px wide.
+      - name: intro
+        label: Introduction
+        type: text
+        description: One or two sentences shown in larger text.
+      - name: body
+        label: About the Living Lab
+        type: rich-text
+      - name: facts
+        label: Key facts (dark box on the right)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.label}"
+        fields:
+          - name: label
+            type: string
+            required: true
+          - name: value
+            type: text
+            required: true
+      - name: highlights
+        label: Highlight cards
+        type: object
+        list:
+          max: 6
+          collapsible:
+            collapsed: true
+            summary: "{fields.title}"
+        fields:
+          - name: title
+            type: string
+            required: true
+          - name: body
+            type: rich-text
+      - name: gallery
+        label: Photo gallery
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.caption}"
+        fields:
+          - name: image
+            type: image
+            required: true
+          - name: caption
+            type: string
+
+  - name: news
+    label: News
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: date
+        type: date
+        required: true
+      - name: summary
+        type: text
+        description: Shown on the news card and under the title.
+      - name: image
+        label: Cover image
+        type: image
+      - name: body
+        label: Article
+        type: rich-text
+
+  - name: subpages
+    label: Extra pages
+    type: collection
+    path: _subpages
+    filename: "{primary}.md"
+    view:
+      fields: [title, menu]
+      primary: title
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: menu
+        label: Show in menu
+        type: boolean
+        default: true
+      - name: menu_title
+        label: Menu label (optional, shorter than the title)
+        type: string
+      - name: order
+        label: Menu order
+        type: number
+        default: 1
+      - name: image
+        label: Cover image
+        type: image
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: settings
+    label: Lab details
+    type: file
+    path: _data/lab.yml
+    fields:
+      - name: name
+        label: Lab name (shown in header and footer)
+        type: string
+        required: true
+      - name: institution
+        label: Lab team / institutions
+        type: string
+      - name: logo
+        label: Lab logo
+        type: image
+      - name: contact_email
+        label: Contact e-mail
+        type: string
+      - name: contact_text
+        label: "\"Get involved\" text"
+        type: text

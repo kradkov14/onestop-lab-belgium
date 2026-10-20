@@ -1,0 +1,10 @@
+---
+layout: default
+---
+<article class="section">
+  <div class="container narrow">
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.image.size > 0 %}<img class="post-image" src="{{ page.image | relative_url }}" alt="">{% endif %}
+    <div class="prose">{% include rich.html html=content %}</div>
+  </div>
+</article>

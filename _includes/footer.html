@@ -1,0 +1,23 @@
+{% assign lab = site.data.lab %}
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-lab">
+      {% if lab.logo.size > 0 %}<img class="footer-lab-logo" src="{{ lab.logo | relative_url }}" alt="" width="72" height="72">{% endif %}
+      <div>
+        <p class="footer-lab-name">{{ lab.name }}</p>
+        {% if lab.institution.size > 0 %}<p>{{ lab.institution }}</p>{% endif %}
+        {% if lab.contact_email.size > 0 %}<p><a href="mailto:{{ lab.contact_email }}">{{ lab.contact_email }}</a></p>{% endif %}
+      </div>
+    </div>
+    <div class="footer-onestop">
+      <p>This Living Lab is part of <a href="https://onestop-project.eu">OneSTOP</a>, a project co-creating technologies for the detection and monitoring of invasive alien species across Europe.</p>
+      <a class="btn btn-ghost" href="https://onestop-project.eu/living-labs">All OneSTOP Living Labs</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+  <div class="container footer-funding">
+    <img src="{{ '/assets/img/eu-funded.svg' | relative_url }}" alt="Funded by the European Union" height="40">
+    <p>OneSTOP receives funding from the European Union’s Horizon Europe Research and Innovation Programme (ID No 101180559). Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Executive Agency (REA). Neither the EU nor REA can be held responsible for them.</p>
+  </div>
+  </div>
+</footer>

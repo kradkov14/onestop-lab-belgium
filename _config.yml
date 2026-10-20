@@ -1,0 +1,45 @@
+# Technical settings — managed by the OneSTOP team, not editable in Pages CMS.
+# Lab-specific texts (name, contact, etc.) live in _data/lab.yml.
+
+title: "Belgium Living Lab"
+description: A OneSTOP Living Lab for the detection and monitoring of invasive alien species.
+url: ""        # e.g. https://belgium.onestop-project.eu (set per lab)
+baseurl: "/onestop-lab-belgium"    # leave empty when a custom domain is used
+
+# true = hide the site from search engines (testing). Set to false at launch.
+noindex: true
+
+# No GitHub Pages default theme (Primer): its assets/css/style.scss would replace ours.
+theme: null
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+permalink: /news/:title/
+
+collections:
+  subpages:
+    output: true
+    permalink: /:name/
+
+defaults:
+  - scope: { path: "index.md" }
+    values: { layout: lab }
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: subpages }
+    values: { layout: page }
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+exclude:
+  - README.md
+  - HANDOVER.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .pages.yml
